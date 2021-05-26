@@ -41,5 +41,8 @@ $ time ./zap -f ../logs/system.journal.0 -o tmp.out -F _SYSTEMD_USER_UNIT -V tra
 [++]: Removing matches
 [++]: Rewriting modified log into memory
 [++]: Rewriting modified log to disk
-[...]
+[++]: Verifiying written log file
+$ journalctl --verify --file ./tmp.out 
+PASS: ./tmp.out
+$
 ```

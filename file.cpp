@@ -47,15 +47,11 @@ output_file_t::open(void)
 	if (true == m_name.empty())
 		throw std::invalid_argument("output_file_t::open(): invalid filename (blank)");
 
-	//if (0 != ::stat(m_name.c_str(), &sb))
-	//	throw std::runtime_error("output_file_t::open(): error in stat(2)");
+	m_fd = ::open(m_name.c_str(), O_CREAT|O_EXCL|O_WRONLY, S_IRWXU|S_IRGRP|S_IROTH);
 
-	m_fd = ::open(m_name.c_str(), O_CREAT|O_WRONLY);
-
-	if (0 > m_fd) {
-		perror("open()");
+	if (0 > m_fd) 
 		throw std::runtime_error("output_file_t::open(): error in open(2)");
-	}
+	
 	return;
 }
 
